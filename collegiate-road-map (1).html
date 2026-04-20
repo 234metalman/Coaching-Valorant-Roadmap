@@ -1,0 +1,888 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Collegiate Road Map | Elite Valorant Coaching & Recruiting</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --red: #FF2D2D;
+    --red-dark: #C41A1A;
+    --gold: #E8C14A;
+    --white: #F5F3EE;
+    --black: #0A0A0A;
+    --gray: #1A1A1A;
+    --gray-mid: #2C2C2C;
+    --gray-light: #888;
+    --font-display: 'Bebas Neue', sans-serif;
+    --font-body: 'DM Sans', sans-serif;
+    --font-mono: 'DM Mono', monospace;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--black);
+    color: var(--white);
+    font-family: var(--font-body);
+    font-size: 16px;
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.2rem 4rem;
+    background: rgba(10,10,10,0.85);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+  }
+
+  .nav-logo {
+    font-family: var(--font-display);
+    font-size: 1.5rem;
+    letter-spacing: 0.08em;
+    color: var(--white);
+    text-decoration: none;
+  }
+  .nav-logo span { color: var(--red); }
+
+  .nav-links {
+    display: flex;
+    gap: 2.5rem;
+    list-style: none;
+  }
+  .nav-links a {
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--gray-light);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--white); }
+
+  .nav-cta {
+    background: var(--red);
+    color: var(--white) !important;
+    padding: 0.55rem 1.4rem;
+    border-radius: 2px;
+    transition: background 0.2s !important;
+  }
+  .nav-cta:hover { background: var(--red-dark) !important; color: var(--white) !important; }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 8rem 4rem 4rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 60% 50% at 80% 50%, rgba(255,45,45,0.12) 0%, transparent 70%),
+      radial-gradient(ellipse 40% 40% at 20% 80%, rgba(232,193,74,0.06) 0%, transparent 60%),
+      linear-gradient(180deg, #0A0A0A 0%, #111 100%);
+  }
+
+  .hero-grid {
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px);
+    background-size: 60px 60px;
+    mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 30%, transparent 100%);
+  }
+
+  .hero-tag {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--red);
+    margin-bottom: 1.5rem;
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    animation: fadeUp 0.8s ease both;
+  }
+  .hero-tag::before {
+    content: '';
+    display: inline-block;
+    width: 2rem;
+    height: 1px;
+    background: var(--red);
+  }
+
+  .hero h1 {
+    font-family: var(--font-display);
+    font-size: clamp(4rem, 10vw, 9rem);
+    line-height: 0.92;
+    letter-spacing: 0.02em;
+    position: relative;
+    animation: fadeUp 0.8s 0.15s ease both;
+  }
+  .hero h1 .line-accent { color: var(--red); }
+  .hero h1 .line-outline {
+    -webkit-text-stroke: 1px rgba(245,243,238,0.35);
+    color: transparent;
+  }
+
+  .hero-sub {
+    font-size: 1.05rem;
+    color: rgba(245,243,238,0.65);
+    max-width: 520px;
+    margin-top: 2rem;
+    font-weight: 300;
+    line-height: 1.7;
+    position: relative;
+    animation: fadeUp 0.8s 0.3s ease both;
+  }
+
+  .hero-actions {
+    display: flex;
+    gap: 1rem;
+    margin-top: 2.5rem;
+    position: relative;
+    animation: fadeUp 0.8s 0.45s ease both;
+  }
+
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    background: var(--red);
+    color: var(--white);
+    text-decoration: none;
+    padding: 0.9rem 2rem;
+    font-family: var(--font-mono);
+    font-size: 0.82rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    border-radius: 2px;
+    transition: background 0.2s, transform 0.2s;
+  }
+  .btn-primary:hover { background: var(--red-dark); transform: translateY(-2px); }
+
+  .btn-secondary {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    background: transparent;
+    color: var(--white);
+    text-decoration: none;
+    padding: 0.9rem 2rem;
+    font-family: var(--font-mono);
+    font-size: 0.82rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    border: 1px solid rgba(255,255,255,0.2);
+    border-radius: 2px;
+    transition: border-color 0.2s, transform 0.2s;
+  }
+  .btn-secondary:hover { border-color: var(--white); transform: translateY(-2px); }
+
+  .hero-stats {
+    display: flex;
+    gap: 3rem;
+    margin-top: 5rem;
+    padding-top: 3rem;
+    border-top: 1px solid rgba(255,255,255,0.08);
+    position: relative;
+    animation: fadeUp 0.8s 0.6s ease both;
+  }
+  .stat-item {}
+  .stat-num {
+    font-family: var(--font-display);
+    font-size: 2.8rem;
+    line-height: 1;
+    color: var(--gold);
+  }
+  .stat-label {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--gray-light);
+    margin-top: 0.3rem;
+  }
+
+  /* ── SECTION BASE ── */
+  section { padding: 7rem 4rem; position: relative; }
+  .section-tag {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--red);
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+  .section-tag::before {
+    content: '';
+    display: inline-block;
+    width: 1.5rem;
+    height: 1px;
+    background: var(--red);
+  }
+  .section-title {
+    font-family: var(--font-display);
+    font-size: clamp(2.5rem, 5vw, 4.5rem);
+    line-height: 1;
+    letter-spacing: 0.02em;
+    margin-bottom: 1.5rem;
+  }
+  .section-desc {
+    font-size: 1rem;
+    color: rgba(245,243,238,0.6);
+    max-width: 560px;
+    line-height: 1.75;
+    font-weight: 300;
+  }
+
+  /* ── COACHES ── */
+  #coaches { background: var(--gray); }
+
+  .coaches-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2px;
+    margin-top: 4rem;
+  }
+
+  .coach-card {
+    background: var(--black);
+    padding: 3rem;
+    position: relative;
+    overflow: hidden;
+    transition: background 0.3s;
+  }
+  .coach-card:hover { background: #111; }
+  .coach-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: var(--red);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.4s ease;
+  }
+  .coach-card:hover::before { transform: scaleX(1); }
+
+  .coach-rank {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 1rem;
+    display: inline-block;
+    background: rgba(232,193,74,0.1);
+    padding: 0.3rem 0.75rem;
+    border-radius: 2px;
+  }
+  .coach-name {
+    font-family: var(--font-display);
+    font-size: 3rem;
+    letter-spacing: 0.03em;
+    line-height: 1;
+    margin-bottom: 0.5rem;
+  }
+  .coach-title {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--gray-light);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 1.5rem;
+  }
+  .coach-bio {
+    font-size: 0.95rem;
+    color: rgba(245,243,238,0.65);
+    line-height: 1.75;
+    font-weight: 300;
+    margin-bottom: 2rem;
+  }
+  .coach-links {
+    display: flex;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+  }
+  .coach-link {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--gray-light);
+    text-decoration: none;
+    padding: 0.4rem 0.9rem;
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 2px;
+    transition: color 0.2s, border-color 0.2s;
+  }
+  .coach-link:hover { color: var(--white); border-color: rgba(255,255,255,0.4); }
+
+  .coach-stat-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+  }
+  .coach-stat {}
+  .coach-stat-val {
+    font-family: var(--font-display);
+    font-size: 2rem;
+    color: var(--red);
+    line-height: 1;
+  }
+  .coach-stat-lbl {
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--gray-light);
+    margin-top: 0.2rem;
+  }
+
+  /* ── ACHIEVEMENTS ── */
+  #achievements { background: var(--black); }
+
+  .achievements-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 2px;
+    margin-top: 4rem;
+  }
+
+  .achievement-card {
+    background: var(--gray);
+    padding: 2.5rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .achievement-card.featured {
+    background: var(--red);
+    grid-column: span 1;
+  }
+  .achievement-icon {
+    font-size: 2.5rem;
+    margin-bottom: 1.5rem;
+  }
+  .achievement-title {
+    font-family: var(--font-display);
+    font-size: 1.6rem;
+    letter-spacing: 0.03em;
+    margin-bottom: 0.5rem;
+    line-height: 1.1;
+  }
+  .achievement-sub {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: rgba(245,243,238,0.6);
+  }
+  .achievement-card.featured .achievement-sub { color: rgba(245,243,238,0.8); }
+
+  /* ── PROCESS ── */
+  #process { background: var(--gray); }
+
+  .process-steps {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2px;
+    margin-top: 4rem;
+  }
+
+  .step {
+    background: var(--black);
+    padding: 2.5rem 2rem;
+    position: relative;
+  }
+  .step-num {
+    font-family: var(--font-display);
+    font-size: 5rem;
+    line-height: 1;
+    color: rgba(255,255,255,0.05);
+    position: absolute;
+    top: 1rem;
+    right: 1.5rem;
+  }
+  .step-icon {
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+  .step-title {
+    font-family: var(--font-display);
+    font-size: 1.4rem;
+    letter-spacing: 0.03em;
+    margin-bottom: 0.75rem;
+  }
+  .step-desc {
+    font-size: 0.88rem;
+    color: rgba(245,243,238,0.55);
+    line-height: 1.7;
+    font-weight: 300;
+  }
+
+  /* ── PHILOSOPHY ── */
+  #philosophy { background: var(--black); }
+
+  .philosophy-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    margin-top: 4rem;
+    align-items: start;
+  }
+
+  .philosophy-card {
+    background: var(--gray);
+    padding: 2.5rem;
+    border-left: 2px solid var(--red);
+    margin-bottom: 2px;
+  }
+  .philosophy-card-title {
+    font-family: var(--font-display);
+    font-size: 1.4rem;
+    letter-spacing: 0.03em;
+    margin-bottom: 0.75rem;
+  }
+  .philosophy-card-body {
+    font-size: 0.92rem;
+    color: rgba(245,243,238,0.6);
+    line-height: 1.75;
+    font-weight: 300;
+  }
+
+  .philosophy-quote {
+    background: var(--red);
+    padding: 3rem;
+    position: sticky;
+    top: 6rem;
+  }
+  .quote-text {
+    font-family: var(--font-display);
+    font-size: 2.2rem;
+    line-height: 1.15;
+    letter-spacing: 0.02em;
+    margin-bottom: 1.5rem;
+  }
+  .quote-attr {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: rgba(245,243,238,0.7);
+  }
+
+  /* ── CTA ── */
+  #cta {
+    background: var(--black);
+    text-align: center;
+    padding: 8rem 4rem;
+    position: relative;
+    overflow: hidden;
+  }
+  #cta::before {
+    content: 'CRM';
+    position: absolute;
+    font-family: var(--font-display);
+    font-size: 30vw;
+    color: rgba(255,255,255,0.015);
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+    letter-spacing: -0.05em;
+  }
+
+  .cta-tag { justify-content: center; }
+
+  .cta-title {
+    font-family: var(--font-display);
+    font-size: clamp(3rem, 7vw, 7rem);
+    line-height: 0.95;
+    letter-spacing: 0.02em;
+    margin-bottom: 1.5rem;
+    position: relative;
+  }
+  .cta-desc {
+    font-size: 1rem;
+    color: rgba(245,243,238,0.55);
+    max-width: 500px;
+    margin: 0 auto 3rem;
+    font-weight: 300;
+    line-height: 1.7;
+    position: relative;
+  }
+  .btn-large {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    background: var(--red);
+    color: var(--white);
+    text-decoration: none;
+    padding: 1.2rem 3rem;
+    font-family: var(--font-mono);
+    font-size: 0.88rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    border-radius: 2px;
+    transition: background 0.2s, transform 0.2s;
+    position: relative;
+  }
+  .btn-large:hover { background: var(--red-dark); transform: translateY(-3px); }
+  .btn-arrow { transition: transform 0.2s; }
+  .btn-large:hover .btn-arrow { transform: translateX(4px); }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--gray);
+    padding: 3rem 4rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-top: 1px solid rgba(255,255,255,0.06);
+  }
+  .footer-logo {
+    font-family: var(--font-display);
+    font-size: 1.3rem;
+    letter-spacing: 0.08em;
+    color: var(--white);
+  }
+  .footer-logo span { color: var(--red); }
+  .footer-copy {
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    letter-spacing: 0.1em;
+    color: var(--gray-light);
+    text-transform: uppercase;
+  }
+  .footer-game {
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    letter-spacing: 0.1em;
+    color: var(--gray-light);
+    text-transform: uppercase;
+  }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .reveal {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+  .reveal.visible {
+    opacity: 1;
+    transform: none;
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 900px) {
+    nav { padding: 1rem 1.5rem; }
+    .nav-links { display: none; }
+    section { padding: 5rem 1.5rem; }
+    .hero { padding: 7rem 1.5rem 3rem; }
+    .hero-stats { gap: 2rem; flex-wrap: wrap; }
+    .coaches-grid { grid-template-columns: 1fr; }
+    .achievements-layout { grid-template-columns: 1fr; }
+    .process-steps { grid-template-columns: 1fr 1fr; }
+    .philosophy-grid { grid-template-columns: 1fr; }
+    .philosophy-quote { position: static; }
+    footer { flex-direction: column; gap: 1rem; text-align: center; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" href="#"><span>C</span>OLLEGIATE ROAD MAP</a>
+  <ul class="nav-links">
+    <li><a href="#coaches">Coaches</a></li>
+    <li><a href="#achievements">Achievements</a></li>
+    <li><a href="#process">Process</a></li>
+    <li><a href="#philosophy">Philosophy</a></li>
+    <li><a href="https://docs.google.com/forms/d/e/1FAIpQLScvhYbW3yIGytLmBNrUBBABJ1gmUEUaYrUO9bJSZVlfm80Gig/viewform" class="nav-cta" target="_blank">Apply Now</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+
+  <div class="hero-tag">Elite Valorant Coaching &amp; Recruiting</div>
+  <h1>
+    YOUR PATH<br>
+    TO <span class="line-accent">COLLEGIATE</span><br>
+    <span class="line-outline">VALORANT</span>
+  </h1>
+  <p class="hero-sub">
+    We develop aspiring players into collegiate competitors — sharpening your game, navigating the recruiting landscape, and getting you signed to the right program.
+  </p>
+  <div class="hero-actions">
+    <a href="https://docs.google.com/forms/d/e/1FAIpQLScvhYbW3yIGytLmBNrUBBABJ1gmUEUaYrUO9bJSZVlfm80Gig/viewform" class="btn-primary" target="_blank">
+      Start Your Journey <span class="btn-arrow">→</span>
+    </a>
+    <a href="#coaches" class="btn-secondary">Meet the Coaches</a>
+  </div>
+
+  <div class="hero-stats">
+    <div class="stat-item">
+      <div class="stat-num">7+</div>
+      <div class="stat-label">Years Collegiate Experience</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">13×</div>
+      <div class="stat-label">Radiant Peak</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">Top 50</div>
+      <div class="stat-label">NA Teams Worked With</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">🏆</div>
+      <div class="stat-label">NJCAAE National Champions</div>
+    </div>
+  </div>
+</section>
+
+<!-- COACHES -->
+<section id="coaches">
+  <div class="section-tag">The Staff</div>
+  <div class="section-title">MEET YOUR COACHES</div>
+  <p class="section-desc">A combined 7+ years of collegiate coaching and recruiting experience, backed by real results at the highest levels of the game.</p>
+
+  <div class="coaches-grid reveal">
+    <!-- Coach John -->
+    <div class="coach-card">
+      <span class="coach-rank">🔺 13× Radiant</span>
+      <div class="coach-name">COACH JOHN</div>
+      <div class="coach-title">Performance &amp; Mechanics Specialist</div>
+      <div class="coach-stat-grid">
+        <div class="coach-stat">
+          <div class="coach-stat-val">13×</div>
+          <div class="coach-stat-lbl">Radiant Peak</div>
+        </div>
+        <div class="coach-stat">
+          <div class="coach-stat-val">1,300+</div>
+          <div class="coach-stat-lbl">Aim Trainer Hours</div>
+        </div>
+      </div>
+      <p class="coach-bio">
+        Coach John has achieved Radiant peak 13 times and holds Grandmaster benchmarks in aim trainers. With over 1,300 hours dedicated to aim training and thousands more in-game, he knows exactly what separates good players from great ones — and how to get you there.
+      </p>
+      <div class="coach-links">
+        <a class="coach-link" href="https://www.vlr.gg/player/8996/johnny" target="_blank">VLR Profile →</a>
+        <a class="coach-link" href="https://tracker.gg/valorant/profile/riot/AE%20Johnny%23JMMER/overview" target="_blank">Tracker.gg →</a>
+      </div>
+    </div>
+
+    <!-- Coach Jacob -->
+    <div class="coach-card">
+      <span class="coach-rank">🎓 Recruiting Expert</span>
+      <div class="coach-name">COACH JACOB</div>
+      <div class="coach-title">Collegiate Recruiting Specialist</div>
+      <div class="coach-stat-grid">
+        <div class="coach-stat">
+          <div class="coach-stat-val">Top 50</div>
+          <div class="coach-stat-lbl">NA Teams Coached</div>
+        </div>
+        <div class="coach-stat">
+          <div class="coach-stat-val">I2</div>
+          <div class="coach-stat-lbl">Peak Rank (Immortal 2)</div>
+        </div>
+      </div>
+      <p class="coach-bio">
+        Coach Jacob has worked directly with top 50 North American teams and has a proven record of coaching players from entry level all the way to Radiant. His expertise in collegiate recruiting means he knows exactly what programs are looking for — and how to make you stand out.
+      </p>
+      <div class="coach-links">
+        <a class="coach-link" href="https://www.vlr.gg/player/29040/jmmer" target="_blank">VLR Profile →</a>
+        <a class="coach-link" href="https://tracker.gg/valorant/profile/riot/jmmer%23jUdGe/overview" target="_blank">Tracker.gg →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ACHIEVEMENTS -->
+<section id="achievements">
+  <div class="section-tag">Proven Results</div>
+  <div class="section-title">A TRACK RECORD<br>THAT SPEAKS</div>
+  <p class="section-desc">Our systems have been tested at the highest levels of collegiate Valorant. These aren't claims — they're results.</p>
+
+  <div class="achievements-layout reveal">
+    <div class="achievement-card featured">
+      <div class="achievement-icon">🏆</div>
+      <div class="achievement-title">NJCAAE NATIONAL CHAMPIONS</div>
+      <div class="achievement-sub">Fall 2025 · Junior College Level</div>
+    </div>
+    <div class="achievement-card">
+      <div class="achievement-icon">🏅</div>
+      <div class="achievement-title">LOCAL LAN TOURNAMENT WIN</div>
+      <div class="achievement-sub">Carrollton, TX · $350 Prize Pool</div>
+    </div>
+    <div class="achievement-card">
+      <div class="achievement-icon">🎯</div>
+      <div class="achievement-title">TOP 50 NA TEAM PLACEMENTS</div>
+      <div class="achievement-sub">Students recruited to elite programs · Verified on VLR.gg</div>
+    </div>
+    <div class="achievement-card">
+      <div class="achievement-icon">💪</div>
+      <div class="achievement-title">FITGMR STUDY PARTICIPANT</div>
+      <div class="achievement-sub">Physical performance research · "Train like an athlete. Play like a pro."</div>
+    </div>
+    <div class="achievement-card">
+      <div class="achievement-icon">📊</div>
+      <div class="achievement-title">BIOMETRIC PERFORMANCE TRACKING</div>
+      <div class="achievement-sub">Physiological data integrated into player development</div>
+    </div>
+    <div class="achievement-card featured" style="background: var(--gray-mid);">
+      <div class="achievement-icon">🌐</div>
+      <div class="achievement-title">COLLEGIATE LANDSCAPE EXPERTS</div>
+      <div class="achievement-sub">7+ years navigating NJCAAE, AVCA, and beyond</div>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section id="process">
+  <div class="section-tag">How It Works</div>
+  <div class="section-title">YOUR ROAD MAP<br>TO GETTING SIGNED</div>
+  <p class="section-desc">A structured, proven path from where you are now to where you want to be.</p>
+
+  <div class="process-steps reveal">
+    <div class="step">
+      <div class="step-num">01</div>
+      <div class="step-icon">📋</div>
+      <div class="step-title">INTEREST FORM</div>
+      <p class="step-desc">Tell us about your current rank, goals, and timeline. We evaluate where you are and what it will take to get you recruited.</p>
+    </div>
+    <div class="step">
+      <div class="step-num">02</div>
+      <div class="step-icon">🎬</div>
+      <div class="step-title">VOD REVIEW</div>
+      <p class="step-desc">In-depth analysis of your gameplay. We identify specific habits, positioning errors, and decision-making gaps holding you back.</p>
+    </div>
+    <div class="step">
+      <div class="step-num">03</div>
+      <div class="step-icon">📈</div>
+      <div class="step-title">DEVELOPMENT PLAN</div>
+      <p class="step-desc">A personalized training plan covering mechanics, game sense, physical conditioning, and the mental side of competing at a high level.</p>
+    </div>
+    <div class="step">
+      <div class="step-num">04</div>
+      <div class="step-icon">🎓</div>
+      <div class="step-title">RECRUITING GUIDANCE</div>
+      <p class="step-desc">We help you understand the collegiate landscape, build your player profile, reach out to programs, and ultimately get signed.</p>
+    </div>
+  </div>
+</section>
+
+<!-- PHILOSOPHY -->
+<section id="philosophy">
+  <div class="section-tag">Our Edge</div>
+  <div class="section-title">MORE THAN<br>JUST COACHING</div>
+
+  <div class="philosophy-grid">
+    <div>
+      <div class="philosophy-card reveal">
+        <div class="philosophy-card-title">PHYSICAL PERFORMANCE</div>
+        <p class="philosophy-card-body">We were invited to participate in a FitGMR study because we believe a healthy body outside the game leads to better performance inside it. Stretching, exercise, and physical preparation are part of our program.</p>
+      </div>
+      <div class="philosophy-card reveal" style="transition-delay: 0.1s;">
+        <div class="philosophy-card-title">BIOMETRIC TRACKING</div>
+        <p class="philosophy-card-body">We utilize biometric data to understand how your body reacts to in-game situations — heart rate, stress response, and more. This data-driven approach keeps you ahead of the curve.</p>
+      </div>
+      <div class="philosophy-card reveal" style="transition-delay: 0.2s;">
+        <div class="philosophy-card-title">COLLEGIATE LANDSCAPE KNOWLEDGE</div>
+        <p class="philosophy-card-body">The recruiting process is confusing. We've been through it as coaches and have helped students navigate it from both sides. We know what programs want — and we'll help you deliver it.</p>
+      </div>
+      <div class="philosophy-card reveal" style="transition-delay: 0.3s;">
+        <div class="philosophy-card-title">NATIONAL CHAMPIONSHIP SYSTEMS</div>
+        <p class="philosophy-card-body">The same systems that won us a national championship are now available to every player who is serious about playing collegiately. We made these tools accessible for a reason.</p>
+      </div>
+    </div>
+
+    <div class="reveal" style="transition-delay: 0.2s;">
+      <div class="philosophy-quote">
+        <div class="quote-text">COLLEGIATE VALORANT WILL BE LUCKY TO HAVE YOU.</div>
+        <div class="quote-attr">— Collegiate Road Map</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section id="cta">
+  <div class="section-tag cta-tag">Ready to Compete?</div>
+  <div class="cta-title reveal">LET'S GET<br>YOU <span style="color:var(--red);">SIGNED</span></div>
+  <p class="cta-desc reveal">Submit your interest form today and take the first step toward your collegiate career. We'll review your profile and be in touch.</p>
+  <a href="https://docs.google.com/forms/d/e/1FAIpQLScvhYbW3yIGytLmBNrUBBABJ1gmUEUaYrUO9bJSZVlfm80Gig/viewform" class="btn-large reveal" target="_blank">
+    Submit Interest Form <span class="btn-arrow">→</span>
+  </a>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo"><span>C</span>OLLEGIATE ROAD MAP</div>
+  <div class="footer-copy">© 2025 Collegiate Road Map · All Rights Reserved</div>
+  <div class="footer-game">Valorant Coaching &amp; Recruiting</div>
+</footer>
+
+<script>
+  // Scroll reveal
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.1 });
+  reveals.forEach(el => observer.observe(el));
+
+  // Nav active scroll
+  const sections = document.querySelectorAll('section[id]');
+  const navLinks = document.querySelectorAll('.nav-links a');
+  window.addEventListener('scroll', () => {
+    let current = '';
+    sections.forEach(s => {
+      if (window.scrollY >= s.offsetTop - 120) current = s.id;
+    });
+    navLinks.forEach(a => {
+      a.style.color = a.getAttribute('href') === '#' + current ? '#F5F3EE' : '';
+    });
+  });
+</script>
+</body>
+</html>
